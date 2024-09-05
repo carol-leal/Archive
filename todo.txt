@@ -1,0 +1,124 @@
+## Feature: App Bar
+- [ ] Create an AppBar with:
+  - [ ] Search bar for querying games from RAWG API
+  - [ ] Navigation links (Home, Games, Genres, Platforms)
+
+## Feature: Drawer
+- [ ] Add a Drawer for:
+  - [ ] Game genres (Action, RPG, Strategy, etc.)
+  - [ ] Platforms (PC, PlayStation, Xbox)
+  - [ ] Links to Popular, Top-rated, and Upcoming games
+
+## Feature: Card Component
+- [ ] Create a Card for each game result:
+  - [ ] Display game cover image
+  - [ ] Title, release date, genre
+  - [ ] Rating and reviews
+
+## Feature: Grid Layout
+- [ ] Use Grid to display game cards in a responsive layout
+
+## Feature: Pagination
+- [ ] Add Pagination to browse through different game results
+
+## Feature: Tabs Component
+- [ ] Implement Tabs on the game detail page for:
+  - [ ] Game details (description, platforms, release date)
+  - [ ] Screenshots
+  - [ ] Similar games
+  - [ ] Reviews
+
+## Feature: Table Component
+- [ ] Use Table to display:
+  - [ ] Top-rated games or statistics for genres/platforms
+
+## Feature: Autocomplete
+- [ ] Add Autocomplete to the search bar to suggest game names as the user types
+
+## Feature: Chip Component
+- [ ] Display game genres as Chips
+- [ ] Display platforms (PC, PS5, etc.) as Chips
+
+## Feature: Accordion Component
+- [ ] Use Accordion to collapse/expand game details like developer, publisher, full description
+
+## Feature: Skeleton Loader
+- [ ] Add Skeleton loaders while game data is being fetched
+
+## Feature: Snackbar Notifications
+- [ ] Show Snackbar notifications for:
+  - [ ] Success (e.g., added to favorites)
+  - [ ] Errors (e.g., failed to fetch data)
+
+## Feature: Dialog Component
+- [ ] Use Dialog for:
+  - [ ] Displaying detailed game info or trailers
+  - [ ] Showing reviews in a popup
+
+## Feature: Tooltip
+- [ ] Add Tooltip for game stats, ratings, and platform icons
+
+## Feature: Avatar Component
+- [ ] Use Avatar for:
+  - [ ] Developer/publisher logos on game cards
+
+## Feature: Progress Component
+- [ ] Show CircularProgress or LinearProgress during data fetching/loading states
+
+## Feature: Badge Component
+- [ ] Add Badge to indicate:
+  - [ ] Number of reviews
+  - [ ] Special highlights (e.g., "Top Game")
+
+## Feature: Rating Component
+- [ ] Display game user ratings with Rating stars
+- [ ] Allow users to rate games (mock, there will be no users page)
+
+## Feature: Form Controls (Checkbox, Switch, Radio, Select)
+- [ ] Add filtering options with Checkbox, Switch, or Radio buttons (e.g., platforms, genres)
+- [ ] Use Select for sorting (e.g., by release date, rating, or popularity)
+
+## Feature: Typography
+- [ ] Use Typography for consistent text styling in:
+  - [ ] Headings, descriptions, and captions
+  - [ ] Game card content
+
+## Feature: Slider Component
+- [ ] Add Slider for filtering games by rating or release date (e.g., between 2010-2023)
+
+## Feature: Button Component
+- [ ] Use Buttons for:
+  - [ ] Search button
+  - [ ] Load More games
+  - [ ] Add to Favorites
+  - [ ] Rate game actions
+
+## Feature: List Component
+- [ ] Use List to display:
+  - [ ] Game features or highlights
+  - [ ] User reviews
+
+## Feature: Paper Component
+- [ ] Use Paper for:
+  - [ ] Game card backgrounds
+  - [ ] Highlight panels for stats or special game features
+
+## Feature: Stepper Component
+- [ ] Use Stepper for multi-step forms, like:
+  - [ ] User registration or preferences (before the page loads, ask if user is minor to block all 18+ games)
+  - [ ] Advanced game search filters
+
+## Ideas Pages:
+### Home Page:
+- [ ] AppBar with search and navigation
+- [ ] Drawer with game categories
+- [ ] Grid of game cards (data from RAWG API)
+- [ ] Pagination for browsing more games
+- [ ] Autocomplete search bar
+
+### Game Detail Page:
+- [ ] Tabs for switching between "Details," "Screenshots," "Reviews"
+- [ ] Accordion for expandable game details
+- [ ] Chips for genre and platform tags
+- [ ] Rating for user reviews
+- [ ] Dialog for additional info (e.g., trailers)

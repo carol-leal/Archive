@@ -1,0 +1,27 @@
+.carousel {
+  display: flex;
+  animation: scroll 100s linear infinite; /* Adjust duration as needed */
+  width: max-content;
+}
+
+.carouselItem {
+  flex: 0 0 auto;
+  margin: 0 10px;
+  text-align: center;
+  z-index: 10; /* Ensures clickability */
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(
+      -50%
+    ); /* Move by half the duplicated content's width */
+  }
+}
+
+.carousel:hover {
+  animation-play-state: paused;
+}
