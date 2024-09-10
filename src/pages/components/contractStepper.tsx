@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -13,7 +13,7 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Skeleton,
+  Tooltip,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useRouter } from "next/router";
@@ -77,7 +77,7 @@ export default function SillyContractStepper() {
     }
 
     if (activeStep === stepTitles.length - 1) {
-      router.push("/home");
+      router.push("/about");
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       setExpanded(false); // Close all accordions when moving to the next page
@@ -159,48 +159,51 @@ export default function SillyContractStepper() {
               </Typography>
 
               {/* Accordions for Contract Sections */}
-              <Box sx={{ mt: 3 }}>
-                {contractSections.map((section, index) => (
-                  <Accordion
-                    key={index}
-                    expanded={expanded === `panel${index}`}
-                    onChange={handleAccordionChange(`panel${index}`)}
-                    sx={{
-                      "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
-                        transform: "rotate(90deg)",
-                      },
-                      "& .MuiAccordionSummary-content": {
-                        fontWeight: "bold",
-                        fontSize: "1.1rem",
-                      },
-                      mb: 2,
-                    }}
-                  >
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls={`panel${index}bh-content`}
-                      id={`panel${index}bh-header`}
+              <Tooltip title="This is an Accordion. It has a Summary and Details">
+                <Box sx={{ mt: 3 }}>
+                  {contractSections.map((section, index) => (
+                    <Accordion
+                      key={index}
+                      expanded={expanded === `panel${index}`}
+                      onChange={handleAccordionChange(`panel${index}`)}
                       sx={{
-                        bgcolor:
-                          expanded === `panel${index}`
-                            ? "primary.light"
-                            : "background.paper",
-                        color:
-                          expanded === `panel${index}`
-                            ? "primary.contrastText"
-                            : "text.primary",
+                        "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded":
+                          {
+                            transform: "rotate(90deg)",
+                          },
+                        "& .MuiAccordionSummary-content": {
+                          fontWeight: "bold",
+                          fontSize: "1.1rem",
+                        },
+                        mb: 2,
                       }}
                     >
-                      <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                        {section.title}
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>{section.content}</Typography>
-                    </AccordionDetails>
-                  </Accordion>
-                ))}
-              </Box>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls={`panel${index}bh-content`}
+                        id={`panel${index}bh-header`}
+                        sx={{
+                          bgcolor:
+                            expanded === `panel${index}`
+                              ? "primary.light"
+                              : "background.paper",
+                          color:
+                            expanded === `panel${index}`
+                              ? "primary.contrastText"
+                              : "text.primary",
+                        }}
+                      >
+                        <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                          {section.title}
+                        </Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <Typography>{section.content}</Typography>
+                      </AccordionDetails>
+                    </Accordion>
+                  ))}
+                </Box>
+              </Tooltip>
 
               {/* User Input for Signing the Contract */}
               <Box

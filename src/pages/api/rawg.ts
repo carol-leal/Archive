@@ -2,13 +2,19 @@
 const apiKey = process.env.NEXT_PUBLIC_RAWG;
 const baseUrl = "https://api.rawg.io/api/";
 
-export async function getGames() {
-  const res = await fetch(`${baseUrl}games?key=${apiKey}`);
+export async function getGames(page = 1) {
   try {
+    const res = await fetch(`/api/games?page=${page}`);
+
+    if (!res.ok) {
+      throw new Error(`API request failed with status ${res.status}`);
+    }
+
     const data = await res.json();
     return data;
   } catch (error) {
-    console.error(error);
+    console.error("Failed to fetch games:", (error as Error).message);
+    return null;
   }
 }
 
