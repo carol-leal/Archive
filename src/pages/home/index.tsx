@@ -20,37 +20,39 @@ import {
   Pagination,
   Skeleton,
   Tooltip,
+  Rating,
+  Chip, // Import Chip component
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useRouter } from "next/router";
-import Grid from "@mui/material/Grid2"; // Correct import for Grid2
-import { getGames } from "../api/rawg"; // Import your API call
+import Grid from "@mui/material/Grid2";
+import { getGames } from "../api/rawg";
 
 const drawerWidth = 240;
 
 const MainPage: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [games, setGames] = useState<any[]>([]); // Store games data from API
+  const [games, setGames] = useState<any[]>([]);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1); // Store total number of pages
-  const [loading, setLoading] = useState(true); // State for loading
+  const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   const router = useRouter();
 
   useEffect(() => {
     async function fetchGames() {
-      setLoading(true); // Start loading state
-      const data = await getGames(page); // Pass the current page to the API
+      setLoading(true);
+      const data = await getGames(page);
       if (data && data.results) {
-        setGames(data.results); // Assuming the API returns a `results` array
-        setTotalPages(Math.ceil(data.count / 20)); // Assuming each page has 20 results
+        setGames(data.results);
+        setTotalPages(Math.ceil(data.count / 20));
       }
-      setLoading(false); // End loading state
+      setLoading(false);
     }
     fetchGames();
-  }, [page]); // Re-fetch games when the page changes
+  }, [page]);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -62,7 +64,7 @@ const MainPage: React.FC = () => {
 
   const handleSearchSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("Search Query:", searchQuery); // Placeholder for querying the RAWG API
+    console.log("Search Query:", searchQuery);
   };
 
   const handlePageChange = (
@@ -187,10 +189,10 @@ const MainPage: React.FC = () => {
           </Box>
 
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            <Button color="inherit" onClick={() => router.push("/")}>
-              Home
+            <Button color="inherit" onClick={() => router.push("/about")}>
+              About
             </Button>
-            <Button color="inherit" onClick={() => router.push("/games")}>
+            <Button color="inherit" onClick={() => router.push("/home")}>
               Games
             </Button>
             <Button color="inherit" onClick={() => router.push("/genres")}>
@@ -253,7 +255,7 @@ const MainPage: React.FC = () => {
         <Typography variant="h4" gutterBottom>
           Welcome to the Game Library
         </Typography>
-        <Typography paragraph>
+        <Typography>
           Explore the best games, genres, and platforms available today. Search
           for your favorite games using the search bar, or navigate through
           different categories using the drawer.
@@ -287,8 +289,8 @@ const MainPage: React.FC = () => {
                         alt={game.name}
                         image={game.background_image}
                         sx={{
-                          height: "200px", // Set a fixed height for images
-                          objectFit: "cover", // Make sure images maintain aspect ratio and cover the space
+                          height: "200px",
+                          objectFit: "cover",
                         }}
                       />
                       <CardContent>
@@ -298,15 +300,35 @@ const MainPage: React.FC = () => {
                         <Typography variant="body2" color="textSecondary">
                           Release Date: {game.released}
                         </Typography>
+
+                        {/* Genre Chips */}
+                        <Box
+                          sx={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            gap: 0.5,
+                            mt: 1,
+                          }}
+                        >
+                          {game.genres.map((genre: any) => (
+                            <Chip
+                              key={genre.id}
+                              label={genre.name}
+                              size="small"
+                              sx={{ mr: 0.5 }}
+                            />
+                          ))}
+                        </Box>
+
+                        <Rating
+                          name="read-only"
+                          value={game.rating}
+                          precision={0.5}
+                          readOnly
+                          sx={{ mt: 1 }}
+                        />
                         <Typography variant="body2" color="textSecondary">
-                          Genre:{" "}
-                          {game.genres
-                            .map((genre: any) => genre.name)
-                            .join(", ")}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary">
-                          Rating: {game.rating} / 5 ({game.ratings_count}{" "}
-                          reviews)
+                          {game.ratings_count} reviews
                         </Typography>
                       </CardContent>
                     </Card>
@@ -318,7 +340,7 @@ const MainPage: React.FC = () => {
         {/* Pagination Component */}
         <Box sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
           <Pagination
-            count={totalPages} // Total pages based on API data
+            count={totalPages}
             page={page}
             onChange={handlePageChange}
             color="primary"
