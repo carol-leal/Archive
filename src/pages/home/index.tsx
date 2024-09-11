@@ -11,10 +11,10 @@ import {
   Rating,
   Chip,
 } from "@mui/material";
-import { useRouter } from "next/router"; // Use Next.js router for navigation
+import { useRouter } from "next/router";
 import Grid from "@mui/material/Grid2";
 import { getGames } from "../api/rawg";
-import Layout from "../components/Layout"; // Import reusable Layout component
+import Layout from "../components/Layout";
 
 const MainPage: React.FC = () => {
   const [games, setGames] = useState<any[]>([]);
@@ -38,7 +38,7 @@ const MainPage: React.FC = () => {
   }, [page]);
 
   const handleCardClick = (gameId: string) => {
-    router.push(`/game/${gameId}`); // Navigate to the detailed page for the clicked game
+    router.push(`/game/${gameId}`);
   };
 
   const handlePageChange = (
@@ -76,8 +76,8 @@ const MainPage: React.FC = () => {
               <Grid
                 size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
                 key={game.id}
-                onClick={() => handleCardClick(game.id)} // Add click event to navigate to the game details page
-                sx={{ cursor: "pointer" }} // Add pointer cursor for clickability
+                onClick={() => handleCardClick(game.id)}
+                sx={{ cursor: "pointer" }}
               >
                 <Tooltip title="Card" arrow>
                   <Card

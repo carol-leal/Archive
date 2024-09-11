@@ -30,10 +30,43 @@ export async function getGamesImages(page: number = 1, pageSize: number = 20) {
   }
 }
 
+// Helper function to fetch and handle JSON safely
+async function fetchData(url: string) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`Error: ${res.status} - ${res.statusText}`);
+    }
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null; // Return null or handle the error appropriately
+  }
+}
+
+// Fetch game details
 export async function getGame(id: string) {
-  const res = await fetch(`${baseUrl}games/${id}?key=${apiKey}`);
-  const data = await res.json();
-  return data;
+  const url = `${baseUrl}games/${id}?key=${apiKey}`;
+  return await fetchData(url);
+}
+
+// Fetch game screenshots
+export async function getGameScreenshots(id: string) {
+  const url = `${baseUrl}games/${id}/screenshots?key=${apiKey}`;
+  return await fetchData(url);
+}
+
+// Fetch game achievements
+export async function getGameAchievements(id: string) {
+  const url = `${baseUrl}games/${id}/achievements?key=${apiKey}`;
+  return await fetchData(url);
+}
+
+// Fetch Reddit posts about the game
+export async function getGameRedditPosts(id: string) {
+  const url = `${baseUrl}games/${id}/reddit?key=${apiKey}`;
+  return await fetchData(url);
 }
 
 export async function getDevelopers() {
