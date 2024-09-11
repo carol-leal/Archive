@@ -1,5 +1,5 @@
 import { Box, Button, Tooltip, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2"; // Correct import for Grid2
+import Grid from "@mui/material/Grid2";
 import MarqueeCarousel from "../components/marqueeCarousel";
 import { useRouter } from "next/router";
 
@@ -11,8 +11,8 @@ const Home: React.FC = () => {
       columns={{ lg: 12, sm: 6, xs: 3 }}
       justifyContent="center"
       alignItems="center"
-      spacing={4} // Adjusted for better spacing between sections
-      sx={{ minHeight: "100vh", textAlign: "center" }} // Vertically center everything
+      spacing={4}
+      sx={{ minHeight: "100vh", textAlign: "center" }}
     >
       {/* Title Section */}
       <Grid size={12}>
@@ -35,7 +35,8 @@ const Home: React.FC = () => {
           A project showcasing Material UI components and games
         </Typography>
         <Typography variant="h6" color="secondary" sx={{ mt: 0 }}>
-          With Dracula Theme!
+          With Dracula Theme for dark mode! And Material UI for light... but you
+          won't use light mode, right?
         </Typography>
         <Button
           variant="contained"

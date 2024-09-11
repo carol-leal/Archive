@@ -62,7 +62,11 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-export default function GameDetail() {
+export default function GameDetail({
+  toggleTheme,
+}: {
+  toggleTheme: () => void;
+}) {
   const [game, setGame] = useState<any>(null);
   const [screenshots, setScreenshots] = useState<any[]>([]);
   const [achievements, setAchievements] = useState<any[]>([]);
@@ -143,7 +147,7 @@ export default function GameDetail() {
   }
 
   return (
-    <Layout>
+    <Layout toggleTheme={toggleTheme}>
       <Container maxWidth="lg" sx={{ py: 4 }}>
         <Grid container spacing={4}>
           <Grid size={{ xs: 12, md: 6 }}>

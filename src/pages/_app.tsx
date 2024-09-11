@@ -1,9 +1,13 @@
 import "@/styles/globals.css";
+import { useState, useMemo } from "react";
 import type { AppProps } from "next/app";
-
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-const theme = createTheme({
+import CssBaseline from "@mui/material/CssBaseline";
+import { PaletteMode } from "@mui/material";
+
+const darkThemeOptions = {
   palette: {
+    mode: "dark" as PaletteMode,
     primary: {
       main: "#bd93f9",
     },
@@ -32,11 +36,27 @@ const theme = createTheme({
     },
     divider: "#6272a4",
   },
-});
+};
+
 export default function App({ Component, pageProps }: AppProps) {
+  const [mode, setMode] = useState<PaletteMode>("dark");
+
+  const theme = useMemo(
+    () =>
+      createTheme(
+        mode === "dark" ? darkThemeOptions : { palette: { mode: "light" } }
+      ),
+    [mode]
+  );
+
+  const toggleTheme = () => {
+    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+  };
+
   return (
     <ThemeProvider theme={theme}>
-      <Component {...pageProps} />
+      <CssBaseline />
+      <Component {...pageProps} toggleTheme={toggleTheme} />
     </ThemeProvider>
   );
 }

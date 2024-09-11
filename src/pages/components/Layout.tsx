@@ -1,5 +1,3 @@
-// components/Layout.tsx
-
 import React, { useState } from "react";
 import {
   AppBar,
@@ -19,14 +17,21 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { useTheme } from "@mui/material/styles";
 import { useRouter } from "next/router";
 
 const drawerWidth = 240;
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Layout: React.FC<{
+  children: React.ReactNode;
+  toggleTheme: () => void;
+}> = ({ children, toggleTheme }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
+  const theme = useTheme();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -91,6 +96,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             Game Library
           </Typography>
 
+          {/* Search Bar */}
           <Box
             component="form"
             onSubmit={handleSearchSubmit}
@@ -139,6 +145,15 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               })}
             />
           </Box>
+
+          {/* Theme Toggle Button */}
+          <IconButton color="inherit" onClick={toggleTheme}>
+            {theme.palette.mode === "dark" ? (
+              <Brightness7Icon />
+            ) : (
+              <Brightness4Icon />
+            )}
+          </IconButton>
 
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <Button color="inherit" onClick={() => router.push("/about")}>
@@ -202,7 +217,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         }}
       >
         <Toolbar />
-        {children} {/* Render the children component (content of the page) */}
+        {children}
       </Box>
     </Box>
   );
